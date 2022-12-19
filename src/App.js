@@ -3,6 +3,7 @@ import ReactJson from 'react-json-view'
 import { web3Connect } from "./web3connect";
 import CheckBalance from "./checkBalance";
 import TransactionDetails from "./transactionDetails";
+import CreateAccount from "./createAccount";
 
 
 function App() {
@@ -11,9 +12,8 @@ function App() {
 	const getBlockData = async () => {
 		let blockData = await web3Connect.eth.getBlockNumber().then(async blockNumber => {
 			let bData = await web3Connect.eth.getBlock(blockNumber)
-			let asd = await web3Connect.eth.getAccounts(console.log);
-			console.log(asd, 'askjghkag');
-			console.log(bData);
+			const Accounts = await web3Connect.eth.getAccounts();
+			console.log(Accounts);
 			return bData
 		})
 		console.log(blockData);
@@ -30,7 +30,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{console.log(blockDetails, "blockDetails")}
+			<CreateAccount />
 			<ReactJson theme='tomorrow' src={blockDetails} />
 			<CheckBalance />
 			<TransactionDetails />
