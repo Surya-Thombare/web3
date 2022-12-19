@@ -35,7 +35,7 @@ function TransactionDetails() {
         <input type="text" placeholder="Enter your transaction address" name='add' />
         <button type="submit">get transaction details</button>
       </form>
-      <div>Your balanace is : <ReactJson theme='tomorrow' src={transaction} /></div>
+      <div>Your balanace is : {transaction ? <ReactJson theme='tomorrow' src={transaction} /> : <></>}</div>
     </div>
   );
 }

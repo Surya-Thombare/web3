@@ -9,10 +9,10 @@ function App() {
 	const [blockDetails, setBlockDetails] = useState([])
 
 	const getBlockData = async () => {
-
-
 		let blockData = await web3Connect.eth.getBlockNumber().then(async blockNumber => {
 			let bData = await web3Connect.eth.getBlock(blockNumber)
+			let asd = await web3Connect.eth.getAccounts(console.log);
+			console.log(asd, 'askjghkag');
 			console.log(bData);
 			return bData
 		})
