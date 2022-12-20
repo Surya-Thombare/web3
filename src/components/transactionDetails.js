@@ -1,30 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactJson from 'react-json-view'
-import { web3Connect } from "./web3connect";
+import { gettransaction } from "../functions/transaction";
 
 function TransactionDetails() {
   const [transaction, setTransaction] = useState();
   const [TransactionAddress, setTransactionAddress] = useState();
 
-  const gettransaction = async (TransactionAddress) => {
-    console.log(TransactionAddress);
-    // Works
-    // let mytransaction = await web3Connect.eth.getTransaction("0x1bdfc9a291918e4cc81735abf95b6165b1117ad619e7090315661abf20124b4b");
-    // not working
-    let mytransaction = await web3Connect.eth.getTransaction(TransactionAddress);
-    console.log(mytransaction, 'mytransaction');
-    setTransaction(mytransaction)
-  };
-
   const getTransactionAddress = (e) => {
     e.preventDefault()
-    console.log(e.target.add.value);
     setTransactionAddress(e.target.add.value);
   }
 
   useEffect(() => {
-    gettransaction(TransactionAddress)
-    console.log(TransactionAddress);
+    const getData = async () => {
+      const data =await gettransaction(TransactionAddress)
+      console.log(data);
+      setTransaction(data)
+    }; 
+    getData()
   }, [TransactionAddress])
   
 

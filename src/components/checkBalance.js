@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { web3Connect } from "./web3connect";
+// import { web3Connect } from "./functions/web3connect";
+import {getBalance} from "../functions/balance"
 
 function CheckBalance() {
   const [balance, setBalanace] = useState();
   const [address, setAddress] = useState();
 
-  const getBalance = async () => {
-    let myBal = await web3Connect.eth.getBalance(address);
-    console.log(myBal);
-    setBalanace(myBal)
-  };
+  // const getBalance = async () => {
+  //   let myBal = await web3Connect.eth.getBalance(address);
+  //   console.log(myBal);
+  //   setBalanace(myBal)
+  // };
 
   const getAddress = (e) => {
     e.preventDefault()
@@ -18,7 +19,13 @@ function CheckBalance() {
   }
 
   useEffect(() => {
-    getBalance()
+
+    const getBal = async () => {
+      const data =await getBalance(address)
+      console.log(data);
+      setBalanace(data)
+    }; 
+    getBal()
   }, [address])
   
 

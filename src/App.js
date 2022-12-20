@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from "react";
 import ReactJson from 'react-json-view'
-import { web3Connect } from "./web3connect";
-import CheckBalance from "./checkBalance";
-import TransactionDetails from "./transactionDetails";
-import CreateAccount from "./createAccount";
+import CheckBalance from "./components/checkBalance";
+import TransactionDetails from "./components/transactionDetails";
+import CreateAccount from "./components/createAccount";
+import { getBlockData } from "./functions/blockData";
 
 
 function App() {
 	const [blockDetails, setBlockDetails] = useState([])
 
-	const getBlockData = async () => {
-		let blockData = await web3Connect.eth.getBlockNumber().then(async blockNumber => {
-			let bData = await web3Connect.eth.getBlock(blockNumber)
-			const Accounts = await web3Connect.eth.getAccounts();
-			console.log(Accounts);
-			return bData
-		})
-		console.log(blockData);
-		setBlockDetails(blockData)
-	}
-
-
-
-
 	useEffect(() => {
-		getBlockData()
+		const getData = async () => {
+			const data =await getBlockData()
+			console.log(data);
+			setBlockDetails(data)
+		  }; 
+		  getData()
 	}, [])
-
 
 	return (
 		<div className="App">
